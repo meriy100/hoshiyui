@@ -7,6 +7,10 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 )
 
+const ScreenWidth = 320
+const ScreenHeight = 240
+const ScreenScale = 2
+
 type Game struct{}
 
 func (g *Game) Update() error {
@@ -17,12 +21,12 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	ebitenutil.DebugPrint(screen, "Hello, World!")
 }
 
-func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
-	return 320, 240
+func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
+	return ScreenWidth, ScreenHeight
 }
 
 func main() {
-	ebiten.SetWindowSize(640, 480)
+	ebiten.SetWindowSize(ScreenWidth*ScreenScale, ScreenHeight*ScreenScale)
 	ebiten.SetWindowTitle("Hello, World!")
 	if err := ebiten.RunGame(&Game{}); err != nil {
 		log.Fatal(err)
